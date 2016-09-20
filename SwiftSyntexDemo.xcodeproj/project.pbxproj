@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C243A6701D90D4A500DF7851 /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = C243A66F1D90D4A500DF7851 /* File.swift */; };
 		C2AFEBC51BBA3E2500900151 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2AFEBC41BBA3E2500900151 /* main.swift */; };
 /* End PBXBuildFile section */
 
@@ -23,8 +24,11 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		C243A66F1D90D4A500DF7851 /* File.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = File.swift; sourceTree = "<group>"; };
 		C2AFEBC11BBA3E2500900151 /* SwiftSyntexDemo */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = SwiftSyntexDemo; sourceTree = BUILT_PRODUCTS_DIR; };
 		C2AFEBC41BBA3E2500900151 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
+		C2E98E0D1D51E20A00D0EFF0 /* SwiftSyntexDemo-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SwiftSyntexDemo-Bridging-Header.h"; sourceTree = "<group>"; };
+		C2E98E501D51E63600D0EFF0 /* CryptoSwift.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CryptoSwift.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,7 +61,10 @@
 		C2AFEBC31BBA3E2500900151 /* SwiftSyntexDemo */ = {
 			isa = PBXGroup;
 			children = (
+				C2E98E501D51E63600D0EFF0 /* CryptoSwift.h */,
 				C2AFEBC41BBA3E2500900151 /* main.swift */,
+				C2E98E0D1D51E20A00D0EFF0 /* SwiftSyntexDemo-Bridging-Header.h */,
+				C243A66F1D90D4A500DF7851 /* File.swift */,
 			);
 			path = SwiftSyntexDemo;
 			sourceTree = "<group>";
@@ -88,11 +95,12 @@
 		C2AFEBB91BBA3E2500900151 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0700;
+				LastUpgradeCheck = 0800;
 				ORGANIZATIONNAME = Tencent;
 				TargetAttributes = {
 					C2AFEBC01BBA3E2500900151 = {
 						CreatedOnToolsVersion = 7.0;
+						LastSwiftMigration = 0800;
 					};
 				};
 			};
@@ -119,6 +127,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C2AFEBC51BBA3E2500900151 /* main.swift in Sources */,
+				C243A6701D90D4A500DF7851 /* File.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -206,14 +215,32 @@
 		C2AFEBC91BBA3E2500900151 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/SwiftSyntexDemo",
+				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "SwiftSyntexDemo/SwiftSyntexDemo-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
 		C2AFEBCA1BBA3E2500900151 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/SwiftSyntexDemo",
+				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "SwiftSyntexDemo/SwiftSyntexDemo-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};
@@ -236,6 +263,7 @@
 				C2AFEBCA1BBA3E2500900151 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

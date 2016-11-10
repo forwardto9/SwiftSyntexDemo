@@ -9,6 +9,9 @@
 import Foundation
 
 
+print(EnumDemoX)
+OCClass().info(name: "uwei")
+
 func swapTest(al a:inout Int, bl b:inout Int) {
     let temp = a
     a = b
@@ -34,9 +37,6 @@ ac.fileprivateName = "filePrivate"
 ac.internalName    = "internal"
 ac.openName        = "open"
 ac.publicName      = "public"
-
-
-
 
 class ClassA {
     var accc = AccessClass()
@@ -98,12 +98,6 @@ a.methodAutoclosure(
     }()
 )
 
-//if a == b {
-//    print("same")
-//} else {
-//    print("not same")
-//}
-
 if a === b {
     print("===")
 } else {
@@ -121,9 +115,6 @@ let metaType:ClassA.Type = ClassA.self
 let instance = metaType.init(x: 10)
 print(instance.x)
 
-
-print("Hello, World!")
-
 var optionalString:String?
 
 optionalString = String(9089)
@@ -133,77 +124,11 @@ print(optionalString!)
 if let string = optionalString {
     print(" numer \(string)")
 } else {
-    
 }
-
-print(arc4random_uniform(7))
-
-print(time(nil))
-print(Date().timeIntervalSince1970 * 1000*100)
-print(Date())
-
-
-//let scanner = NSScanner(string:optionalString!)
-//scanner.scanUpToCharactersFromSet(NSCharacterSet.decimalDigitCharacterSet(), intoString: nil)
-//var number:Int32 = 0
-//scanner.scanInt(&number)
-//print(number)
-
-var number:Double = 67782356.097
-
-var weigh = 10000
-//assert(weigh > 100001, "to samll")
-var numberString = ""
-if number >= Double(weigh) {
-    let fx1 = number / Double(weigh)
-    numberString = NSString(format: "%.2f", fx1).appending("万")
-} else {
-    numberString = NSString(format: "%.2f", number) as String
-}
-print(numberString)
-
-
-print(String(MAXFLOAT))
-
-let numberString1 = NSMutableString(string: "12345")
-let numberString2 = NSMutableString(string: "123456")
-
-print(numberString1.length)
-print(numberString2.length)
-
 
 if let lastName = Int("123"), let familyName = Int("456") , lastName < familyName {
     print("\(lastName) + \(familyName)")
-//    assert(lastName > familyName, "uwei custom")
 }
-
-
-class A {
-    var name:String?
-    init(){}
-    init?(name:String) {
-        self.name = name
-        if name.isEmpty {
-            return nil
-        }
-    }
-}
-
-class SubA: A {
-    override init() {
-        super.init()
-    }
-    
-    override init?(name: String) {
-        super.init()
-    }
-
-    
-}
-
-let subA1 = SubA(name: "")
-let subA2 = SubA()
-print(subA1?.name)
 
 
 
@@ -225,7 +150,7 @@ func neverRetuen() -> Never {
     fatalError("Something very, very bad happened")
 }
 
-
+var weigh = 1
 guard weigh > 0 else {
     neverRetuen()
 }
@@ -233,7 +158,6 @@ guard weigh > 0 else {
 
 
 func testThrowError(result num:Int?) throws ->String? {
-//    guard num! > 0 else {
     guard Int(num!) > 0 else {
     print("num <= 0")
     
@@ -247,7 +171,6 @@ func testThrowError(result num:Int?) throws ->String? {
 // rethrows only for parameters throw error
 func testRethrowError(callback:() throws -> Void) rethrows {
     try callback()
-//    try testThrowError(result: 12)
 }
 
 
@@ -263,9 +186,6 @@ do {
 } catch ErrorEnum.error1 {
     print("catch error!")
 }
-
-let optionErrorNil = try? testThrowError(result: -2)
-print(optionErrorNil)
 
 var index = 0
 label :while index < 10 {
@@ -286,13 +206,6 @@ class SubNSObject: NSObject {
     
 }
 
-
-let subObject = SubNSObject()
-subObject.name = "yuan"
-
-let selector = #selector(subObject.showName(_:));
-
-subObject.perform(selector, with: "uwei")
 
 
 let tuple1 = (27, "uwei")
@@ -324,21 +237,6 @@ func ==== (p1:SubNSObject, p2:SubNSObject) -> Bool {
     
     return result
 }
-
-
-
-class UPoint {
-    var x:Float?
-    var y:Float?
-    init(x:Float, y:Float){
-    self.x = x
-    self.y = y
-    }
-    
-}
-
-
-
 let s1 = SubNSObject()
 //p1.name = "vv"
 let s2 = SubNSObject()
@@ -350,7 +248,14 @@ print(sResult)
 //precompile error
 //let result = tuple1 > tuple3
 
-
+class UPoint {
+    var x:Float?
+    var y:Float?
+    init(x:Float, y:Float){
+        self.x = x
+        self.y = y
+    }
+}
 // only for file scope
 // first declare the override operator
 infix operator +- {associativity right precedence 0}
@@ -392,7 +297,6 @@ let jim = Person(name: "Jim")
 let yuanyuan = Person(name: "Yuanyuan")
 gabrielle.friends = [jim, yuanyuan]
 gabrielle.bestFriend = yuanyuan
-
 print ( gabrielle.value(forKeyPath: #keyPath(Person.bestFriend.name)) )
 
 
@@ -424,21 +328,6 @@ func printMathResult(_ mathFunction: (Int, Int) -> Int, _ a: Int, _ b: Int) {
 }
 
 printMathResult(addTwoInts, 3, 5)
-
-//func stepForward(_ input: Int) -> Int {
-//    return input + 1
-//}
-//func stepBackward(_ input: Int) -> Int {
-//        return input - 1
-//}
-//
-//func chooseStepFunction(backward: Bool) -> (Int) -> Int {
-//    return backward ? stepBackward : stepForward
-//}
-//
-//var currentValue = 3
-//let moveNearerToZero = chooseStepFunction(backward: currentValue > 0)
-
 
 func chooseStepFunction(backward: Bool) -> (Int) -> Int {
     func stepForward(input: Int) -> Int { return input + 1 }
@@ -489,7 +378,7 @@ let selectorForPropertyGetter = #selector(getter: SomeClass.property)
 let selectorForPropertySetter = #selector(setter: SomeClass.myProperty)
 
 
-// 高阶函数的使用
+// MARK:- 高阶函数的使用
 let intArray = [1,2,4,8,16]
 let sIntArray = intArray.map { $0*$0 }
 print(sIntArray)
@@ -510,7 +399,7 @@ print(stringArray)
 
 
 
-// 面向函数式编程
+// MARK:- 面向函数式编程
 let clourse:(Int) -> Int = { x in
     return x + 2
 }
@@ -523,7 +412,7 @@ func testClourse(str:String, clourse:(Int)->Int) -> String {
     return string
 }
 
-// 科里化函数
+// MARK:- 科里化函数
 func curryTestClourse(str:String)->((Int)->Int) -> String {
     return { (intClourse: (Int) -> Int) -> String in
     let result = intClourse(9)
@@ -567,15 +456,7 @@ manager.data.append("Some more data")
 print(manager.data)
 print(manager.importer.fileName)
 
-
-
-
-
-
-
-
-
-//  about point in swift
+// MARK:- About point in swift
 var intV = 10
 var mpInt = UnsafeMutablePointer<Int>.allocate(capacity: 1)
 mpInt.initialize(to: intV)
@@ -604,9 +485,36 @@ print("int p = \(intP.pointee)")
 var array = [1111,2222]
 var arrPtr = UnsafeBufferPointer<Int>(start: &array, count:array.count)
 var basePtr = arrPtr.baseAddress
-print(basePtr?.pointee)
+print(basePtr?.pointee ?? "")
 var nextPtr = basePtr?.successor()
-print(nextPtr?.pointee)
+print(nextPtr?.pointee ?? "")
+
+let stringParams = "123455656677"
+let pStr = UnsafeMutablePointer<Int8>.allocate(capacity: stringParams.characters.count)
+pStr.initialize(from: stringParams.cString(using: String.Encoding.utf8)!)
+print(showInfo(params: pStr))
+
+let pRawPtr = UnsafeMutableRawPointer.allocate(bytes: stringParams.characters.count, alignedTo: MemoryLayout<String>.alignment)
+let tPtr = pRawPtr.initializeMemory(as: String.self, to: stringParams)
+print(pRawPtr.load(as: String.self))
+let ttPtr = pRawPtr.initializeMemory(as: Int8.self, from: pStr, count: stringParams.characters.count)
+print(showInfo(params: ttPtr))
+
+
+struct AAA {
+    var value:Int
+}
+func initRawAA(p:UnsafeMutableRawPointer) -> UnsafeMutablePointer<AAA> {
+    return p.initializeMemory(as: AAA.self, to: AAA(value: 1111))
+}
+
+let rawPtr = UnsafeMutableRawPointer.allocate(bytes: MemoryLayout<AAA>.stride, alignedTo: MemoryLayout<AAA>.alignment)
+let pa = initRawAA(p: rawPtr)
+print(rawPtr.load(as: AAA.self))
+print(pa.pointee.value)
+
+let rp = UnsafeMutableRawPointer.allocate(bytes: 1, alignedTo: 1)
+rp.bindMemory(to: AAA.self, capacity: 2)
 
 
 //var mpString = UnsafeMutablePointer<String>(allocatingCapacity: 1)

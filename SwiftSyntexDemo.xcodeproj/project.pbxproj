@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		C243A6701D90D4A500DF7851 /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = C243A66F1D90D4A500DF7851 /* File.swift */; };
 		C2AFEBC51BBA3E2500900151 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2AFEBC41BBA3E2500900151 /* main.swift */; };
+		C2CF16831DD40B5F00810D30 /* OCClass.m in Sources */ = {isa = PBXBuildFile; fileRef = C2CF16821DD40B5F00810D30 /* OCClass.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -27,6 +28,8 @@
 		C243A66F1D90D4A500DF7851 /* File.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = File.swift; sourceTree = "<group>"; };
 		C2AFEBC11BBA3E2500900151 /* SwiftSyntexDemo */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = SwiftSyntexDemo; sourceTree = BUILT_PRODUCTS_DIR; };
 		C2AFEBC41BBA3E2500900151 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
+		C2CF16811DD40B5F00810D30 /* OCClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OCClass.h; sourceTree = "<group>"; };
+		C2CF16821DD40B5F00810D30 /* OCClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OCClass.m; sourceTree = "<group>"; };
 		C2E98E0D1D51E20A00D0EFF0 /* SwiftSyntexDemo-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SwiftSyntexDemo-Bridging-Header.h"; sourceTree = "<group>"; };
 		C2E98E501D51E63600D0EFF0 /* CryptoSwift.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CryptoSwift.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -65,6 +68,8 @@
 				C2AFEBC41BBA3E2500900151 /* main.swift */,
 				C2E98E0D1D51E20A00D0EFF0 /* SwiftSyntexDemo-Bridging-Header.h */,
 				C243A66F1D90D4A500DF7851 /* File.swift */,
+				C2CF16811DD40B5F00810D30 /* OCClass.h */,
+				C2CF16821DD40B5F00810D30 /* OCClass.m */,
 			);
 			path = SwiftSyntexDemo;
 			sourceTree = "<group>";
@@ -95,7 +100,7 @@
 		C2AFEBB91BBA3E2500900151 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0800;
+				LastUpgradeCheck = 0810;
 				ORGANIZATIONNAME = Tencent;
 				TargetAttributes = {
 					C2AFEBC01BBA3E2500900151 = {
@@ -126,6 +131,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C2CF16831DD40B5F00810D30 /* OCClass.m in Sources */,
 				C2AFEBC51BBA3E2500900151 /* main.swift in Sources */,
 				C243A6701D90D4A500DF7851 /* File.swift in Sources */,
 			);
@@ -147,8 +153,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
@@ -190,8 +198,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;

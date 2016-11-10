@@ -8,7 +8,10 @@
 
 import Foundation
 
+// MARK: - String
+StringDemo.demo()
 
+// MARK: - OC Enum to Swift
 print(EnumDemoX)
 OCClass().info(name: "uwei")
 

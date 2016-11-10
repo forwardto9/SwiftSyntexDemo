@@ -10,6 +10,7 @@
 		C243A6701D90D4A500DF7851 /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = C243A66F1D90D4A500DF7851 /* File.swift */; };
 		C2AFEBC51BBA3E2500900151 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2AFEBC41BBA3E2500900151 /* main.swift */; };
 		C2CF16831DD40B5F00810D30 /* OCClass.m in Sources */ = {isa = PBXBuildFile; fileRef = C2CF16821DD40B5F00810D30 /* OCClass.m */; };
+		C2CF16851DD44E5C00810D30 /* StringDemo.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2CF16841DD44E5C00810D30 /* StringDemo.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -30,6 +31,7 @@
 		C2AFEBC41BBA3E2500900151 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		C2CF16811DD40B5F00810D30 /* OCClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OCClass.h; sourceTree = "<group>"; };
 		C2CF16821DD40B5F00810D30 /* OCClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OCClass.m; sourceTree = "<group>"; };
+		C2CF16841DD44E5C00810D30 /* StringDemo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringDemo.swift; sourceTree = "<group>"; };
 		C2E98E0D1D51E20A00D0EFF0 /* SwiftSyntexDemo-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SwiftSyntexDemo-Bridging-Header.h"; sourceTree = "<group>"; };
 		C2E98E501D51E63600D0EFF0 /* CryptoSwift.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CryptoSwift.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -70,6 +72,7 @@
 				C243A66F1D90D4A500DF7851 /* File.swift */,
 				C2CF16811DD40B5F00810D30 /* OCClass.h */,
 				C2CF16821DD40B5F00810D30 /* OCClass.m */,
+				C2CF16841DD44E5C00810D30 /* StringDemo.swift */,
 			);
 			path = SwiftSyntexDemo;
 			sourceTree = "<group>";
@@ -134,6 +137,7 @@
 				C2CF16831DD40B5F00810D30 /* OCClass.m in Sources */,
 				C2AFEBC51BBA3E2500900151 /* main.swift in Sources */,
 				C243A6701D90D4A500DF7851 /* File.swift in Sources */,
+				C2CF16851DD44E5C00810D30 /* StringDemo.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

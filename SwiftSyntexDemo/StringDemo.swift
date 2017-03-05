@@ -19,7 +19,10 @@ class StringDemo {
         print(flag.utf8.count)
         // Prints "8"
         
-        var demoString = "we are good boys"
+        var demoString = "we are good boys&"
+        
+        let index = demoString.index(demoString.startIndex, offsetBy: demoString.characters.count - 1)
+        demoString = demoString.substring(to: index)
         let results = demoString.components(separatedBy: " ")
         print(results)
         

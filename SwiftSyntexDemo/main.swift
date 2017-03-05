@@ -8,6 +8,133 @@
 
 import Foundation
 
+
+@available(iOS 10, *)
+func testiOS10() -> Void {
+    print("10")
+}
+
+@available(macOS, deprecated:10, message:"this is a deprecated protocol")
+protocol MyProtocol {
+    // protocol definition
+}
+
+
+
+protocol MyRenamedProtocol {
+    // protocol definition
+}
+
+@available(iOS, unavailable, renamed: "MyRenamedProtocol")
+
+
+
+
+
+class protocolTest: MyProtocol {
+}
+
+
+class OverLoading {
+    func overload(p1:String) -> Void {
+        print(p1)
+    }
+    
+    @discardableResult
+    func overload() -> Bool {
+        return false
+    }
+}
+
+let overload1 = OverLoading()
+overload1.overload() // no warning
+overload1.overload(p1: "overload")
+
+extension Stack where Element:Equatable {
+    func isTop(_ item: Element) -> Bool {
+        guard let topItem = items.last else {
+            return false
+        }
+        return topItem == item
+    }
+}
+
+protocol Container {
+    associatedtype Item
+    mutating func append(_ item: Item)
+    var count: Int { get }
+    subscript(i: Int) -> Item { get }
+}
+
+struct Stack<Element>:Container {
+    typealias Item = Element
+    
+    internal subscript(i: Int) -> Element {
+        return self.items[i];
+    }
+
+    mutating internal func append(_ item: Element) {
+        self.items.append(item)
+    }
+
+    internal var count: Int {
+        return self.items.count
+    }
+
+    var items = [Element]()
+    mutating func push(item:Element) -> Void {
+        self.items.append(item)
+    }
+    
+    mutating func pop() -> Void {
+        self.items.removeLast()
+    }
+    
+    
+    
+}
+
+
+var stackInt = Stack(items: [1,2,4])
+print(stackInt.count)
+stackInt.append(3)
+print(stackInt.count)
+print(stackInt[2])
+stackInt.pop()
+print(stackInt.count)
+for it in stackInt.items {
+    print(it)
+}
+
+
+
+
+
+
+let urls = ""
+
+let group = DispatchGroup()
+
+// Loop through the urls array, in parallel
+
+
+DispatchQueue.concurrentPerform(iterations: 30) { (x) in
+    group.enter()
+    print("x = \(x)")
+    group.leave()
+}
+
+let result = group.wait(timeout: DispatchTime.distantFuture)
+print("result = \(result)")
+
+
+// Now all your tasks have finished
+
+
+
+
+
+
 // MARK: - String
 StringDemo.demo()
 
@@ -49,10 +176,12 @@ class ClassA {
     required init (x:Int) {
         self.x = x
         
-        let swiftCallback : @convention(swift) (CGFloat, CGFloat) -> CGFloat = {
+        
+        let swiftCallback : @convention(block) (CGFloat, CGFloat) -> CGFloat = {
             (x, y) -> CGFloat in
             return x + y
         }
+        print(swiftCallback(10, 19))
         
     }
     

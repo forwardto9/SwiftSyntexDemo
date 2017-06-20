@@ -9,6 +9,117 @@
 import Foundation
 
 
+let predicateDemo = PredicateDemo()
+predicateDemo.testPredicate()
+
+
+class HTMLElement {
+    
+    let name: String
+    let text: String?
+    
+    // 这个地方使用？符号标记，是为了可以在外面进行赋空值操作，从而可以标记为可以释放引用
+    lazy var asHTML: (() -> String)? = { [unowned self] in // 此处使用unowned标记，可以让闭包标中不在强引用self
+        if let text = self.text {
+            return "<\(self.name)>\(text)</\(self.name)>"
+        } else {
+            return "<\(self.name) />"
+        }
+    }
+    
+    init(name: String, text: String? = nil) {
+        self.name = name
+        self.text = text
+    }
+    
+    deinit {
+        print("\(name) is being deinitialized")
+    }
+    
+}
+
+
+var heading:HTMLElement? = HTMLElement(name: "h1")
+let defaultText = "some default text"
+heading!.asHTML = {
+    return "<\(heading!.name)>\(heading?.text ?? defaultText)</\(heading!.name)>"
+}
+print(heading!.asHTML!())
+
+heading = nil
+
+
+var paragraph: HTMLElement? = HTMLElement(name: "p", text: "hello, world")
+print(paragraph!.asHTML?() ?? "hahaha")
+//paragraph!.asHTML = nil (如果asHTML被？符号标记，此处必须要释放，这样才能让paragraph充分释放)
+paragraph = nil
+
+
+class Country {
+    let name:String
+    var capitalCity:City! // 这样声明，表示这个值默认是nil
+    init(name:String, capitalName:String) {
+        self.name = name // 到此为止，self实例就创建完毕，可以访问了，如果不是按照！符号的声明方式，下面的代码就会无法编译
+        self.capitalCity = City(name: capitalName, country: self)
+    }
+}
+
+class City {
+    let name:String
+    unowned let country:Country
+    init(name:String, country:Country) {
+        self.name = name
+        self.country = country
+    }
+}
+
+let country = Country(name: "zhongguo", capitalName: "beijing")
+let city = City(name: "beijing", country: country)
+
+
+
+class TestOCClass: NSObject {
+    var testVar:NSString? = ""
+//    deinit {
+//        print("deinit from TestOCClass")
+//        testVar = nil
+//    }
+}
+
+class TestSwiftClass: NSObject {
+    var testVar:String? = ""
+    deinit {
+        print("deinit from TestSwiftClass")
+//        testVar = nil
+    }
+}
+
+
+var toc:TestOCClass? = TestOCClass()
+toc?.testVar = "oc"
+toc = nil
+
+var tsc:TestSwiftClass? = TestSwiftClass()
+tsc?.testVar = "swift"
+tsc = nil
+
+
+
+func numberNotation(_ number:Int64) -> String {
+    var numberString = ""
+    let weight:Int64 = 10000
+    if number >= weight {
+        let fx1 = Float(number) / Float(weight)
+        numberString = NSString(format: "%.2f", fx1).appending("万")
+    } else {
+        numberString = NSString(format: "%d", number) as String
+    }
+    return numberString
+}
+
+print(numberNotation(11000))
+
+
 @available(iOS 10, *)
 func testiOS10() -> Void {
     print("10")
@@ -413,15 +524,7 @@ print("P3 = (\(p3.x!), \(p3.y!))")
 //#endif
 
 
-class Person: NSObject {
-    var name: String
-    var friends: [Person] = []
-    var bestFriend: Person? = nil
-    
-    init(name: String) {
-        self.name = name
-    }
-}
+
 
 
 let gabrielle = Person(name: "Gabrielle")

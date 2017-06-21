@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		C243A6701D90D4A500DF7851 /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = C243A66F1D90D4A500DF7851 /* File.swift */; };
+		C264E66E1EF91DC90067BA7A /* PredicateDemo.swift in Sources */ = {isa = PBXBuildFile; fileRef = C264E66D1EF91DC90067BA7A /* PredicateDemo.swift */; };
+		C264E6701EF91E4D0067BA7A /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = C264E66F1EF91E4D0067BA7A /* Model.swift */; };
 		C2AFEBC51BBA3E2500900151 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2AFEBC41BBA3E2500900151 /* main.swift */; };
 		C2CF16831DD40B5F00810D30 /* OCClass.m in Sources */ = {isa = PBXBuildFile; fileRef = C2CF16821DD40B5F00810D30 /* OCClass.m */; };
 		C2CF16851DD44E5C00810D30 /* StringDemo.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2CF16841DD44E5C00810D30 /* StringDemo.swift */; };
@@ -27,6 +29,8 @@
 
 /* Begin PBXFileReference section */
 		C243A66F1D90D4A500DF7851 /* File.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = File.swift; sourceTree = "<group>"; };
+		C264E66D1EF91DC90067BA7A /* PredicateDemo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PredicateDemo.swift; sourceTree = "<group>"; };
+		C264E66F1EF91E4D0067BA7A /* Model.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 		C2AFEBC11BBA3E2500900151 /* SwiftSyntexDemo */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = SwiftSyntexDemo; sourceTree = BUILT_PRODUCTS_DIR; };
 		C2AFEBC41BBA3E2500900151 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		C2CF16811DD40B5F00810D30 /* OCClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OCClass.h; sourceTree = "<group>"; };
@@ -73,6 +77,8 @@
 				C2CF16811DD40B5F00810D30 /* OCClass.h */,
 				C2CF16821DD40B5F00810D30 /* OCClass.m */,
 				C2CF16841DD44E5C00810D30 /* StringDemo.swift */,
+				C264E66D1EF91DC90067BA7A /* PredicateDemo.swift */,
+				C264E66F1EF91E4D0067BA7A /* Model.swift */,
 			);
 			path = SwiftSyntexDemo;
 			sourceTree = "<group>";
@@ -135,7 +141,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				C2CF16831DD40B5F00810D30 /* OCClass.m in Sources */,
+				C264E66E1EF91DC90067BA7A /* PredicateDemo.swift in Sources */,
 				C2AFEBC51BBA3E2500900151 /* main.swift in Sources */,
+				C264E6701EF91E4D0067BA7A /* Model.swift in Sources */,
 				C243A6701D90D4A500DF7851 /* File.swift in Sources */,
 				C2CF16851DD44E5C00810D30 /* StringDemo.swift in Sources */,
 			);

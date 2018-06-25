@@ -13,14 +13,14 @@ fileprivate let lastNamekey = "lastName"
 fileprivate let agekey = "age"
 
 class PersonDemo: NSObject,NSCoding {
-    var firstName: NSString
-    var lastName: NSString
-    var age: Int
+    @objc var firstName: NSString
+    @objc var lastName: NSString
+    @objc var age: Int
     
     init(firstName: String, lastName: String, age: Int) {
         self.firstName = firstName as NSString
         self.lastName = lastName as NSString
-        self.age = Int(NSNumber(value: age))
+        self.age = Int(truncating: NSNumber(value: age))
     }
     
     override var description: String {
@@ -35,7 +35,7 @@ class PersonDemo: NSObject,NSCoding {
     required init?(coder aDecoder: NSCoder) {
         self.firstName = aDecoder.decodeObject(forKey: firstNamekey) as! NSString
         self.lastName  = aDecoder.decodeObject(forKey: lastNamekey) as! NSString
-        self.age       = Int(aDecoder.decodeObject(forKey: agekey) as! NSNumber)
+        self.age       = Int(truncating: aDecoder.decodeObject(forKey: agekey) as! NSNumber)
     }
     
     func encode(with aCoder: NSCoder) {
@@ -137,10 +137,6 @@ class PredicateDemo:NSObject {
         let sumExpression = NSExpression(forFunction: "stddev:", arguments: [NSExpression(forConstantValue: numbersArray)])
         let result = sumExpression.expressionValue(with: nil, context: nil)
         print(result ?? "result is nil")
-        
-        
-        exit(1)
-        
     }
     
 }

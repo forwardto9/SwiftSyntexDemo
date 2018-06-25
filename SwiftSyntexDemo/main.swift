@@ -8,7 +8,6 @@
 
 import Foundation
 
-
 let predicateDemo = PredicateDemo()
 predicateDemo.testPredicate()
 
@@ -16,7 +15,7 @@ predicateDemo.testPredicate()
 class HTMLElement {
     
     let name: String
-    let text: String?
+    @objc   let text: String?
     
     // 这个地方使用？符号标记，是为了可以在外面进行赋空值操作，从而可以标记为可以释放引用
     lazy var asHTML: (() -> String)? = { [unowned self] in // 此处使用unowned标记，可以让闭包标中不在强引用self
@@ -177,7 +176,8 @@ protocol Container {
     subscript(i: Int) -> Item { get }
 }
 
-struct Stack<Element>:Container {
+// MARK: Generic Type
+struct Stack<Element>:Container {// 泛型支持是通过<>符号
     typealias Item = Element
     
     internal subscript(i: Int) -> Element {
@@ -193,6 +193,7 @@ struct Stack<Element>:Container {
     }
 
     var items = [Element]()
+    // 结构体中，如果某个方法想要改变这个结构体，必须要添加mutating关键字
     mutating func push(item:Element) -> Void {
         self.items.append(item)
     }
@@ -217,17 +218,16 @@ for it in stackInt.items {
     print(it)
 }
 
+var stackString = Stack(items: ["string1", "string2"])
+stackString.append("string3")
+for string in stackString.items {
+    print(string)
+}
 
 
 
-
-
-let urls = ""
-
+// MARK: GCD in Swift
 let group = DispatchGroup()
-
-// Loop through the urls array, in parallel
-
 
 DispatchQueue.concurrentPerform(iterations: 30) { (x) in
     group.enter()
@@ -249,7 +249,38 @@ print("result = \(result)")
 // MARK: - String
 StringDemo.demo()
 
-// MARK: - OC Enum to Swift
+// MARK:  Enum
+//enum Color:Int {
+enum Color {
+    case red, black
+    func colorDescription() -> String {
+        switch self {
+        case .red:
+            return "RED"
+        case .black:
+            return "BLACK"
+        }
+    }
+}
+//print(Color.black.rawValue)
+print(Color.black)
+
+enum ServerResponse {
+    case result(String, String)
+    case failure(String)
+}
+
+let sucess = ServerResponse.result("6:00am", "9:00pm")
+let failuer = ServerResponse.failure("Out of service")
+print(sucess)
+switch sucess {
+case let .result(sunrise, sunset):
+    print("sunrice is at \(sunrise), sunset is at \(sunset)")
+case let .failure(reason):
+    print("failure reason is \(reason)")
+}
+
+
 print(EnumDemoX)
 OCClass().info(name: "uwei")
 
@@ -399,14 +430,18 @@ guard weigh > 0 else {
 }
 
 
-
+// MARK: Error Handling
+@discardableResult // 取消返回值未用到的编译警告
 func testThrowError(result num:Int?) throws ->String? {
+    defer { // defer代码块类似OC中try catch finally块中的finally块，始终是函数中最后执行的，可以用于还原设置、清理现场等场景
+        print("this is like exceeded finally")
+    }
     guard Int(num!) > 0 else {
     print("num <= 0")
     
     throw ErrorEnum.error1
     }
-    print("num = \(num)")
+    print("num = \(String(describing: num))")
     return String(describing: num)
 }
 
@@ -418,17 +453,14 @@ func testRethrowError(callback:() throws -> Void) rethrows {
 
 
 do {
-//    try testThrowError(1)
-    let x = try testThrowError(result: -1)
+    try testThrowError(result: -1)
 } catch ErrorEnum.error1 {
     print("catch error!")
 }
 
-do {
-    let x = try testThrowError(result: 1)
-} catch ErrorEnum.error1 {
-    print("catch error!")
-}
+// try?，当方法调用出现throw的时候，方法的返回值是nil，throw出的error会被取消
+let testThrowErrorResult = try? testThrowError(result: -1)
+print(testThrowErrorResult as Any )
 
 var index = 0
 label :while index < 10 {
@@ -501,20 +533,18 @@ class UPoint {
 }
 // only for file scope
 // first declare the override operator
-infix operator +- {associativity right precedence 0}
+//infix operator +- {associativity right precedence 0}
 // then complemention
-func +-(p1:UPoint, p2:UPoint) -> UPoint {
-    return UPoint(x: p2.x! - p1.x!, y: p2.y! + p1.y!)
-}
+//func +-(p1:UPoint, p2:UPoint) -> UPoint {
+//    return UPoint(x: p2.x! - p1.x!, y: p2.y! + p1.y!)
+//}
 
 
 
 var p1 = UPoint(x: 1, y: 2)
 var p2 = UPoint(x: 3, y: -1)
 
-let p3 = p1 +- p2
-
-print("P3 = (\(p3.x!), \(p3.y!))")
+//let p3 = p1 +- p2
 
 
 //#if swift(>=3.0)
@@ -532,7 +562,7 @@ let jim = Person(name: "Jim")
 let yuanyuan = Person(name: "Yuanyuan")
 gabrielle.friends = [jim, yuanyuan]
 gabrielle.bestFriend = yuanyuan
-print ( gabrielle.value(forKeyPath: #keyPath(Person.bestFriend.name)) )
+print ( gabrielle.value(forKeyPath: #keyPath(Person.bestFriend.name)) as Any )
 
 
 func functionWithDefaultValue(p:Int  = 100) -> Int {
@@ -597,7 +627,7 @@ if let bounds = minMax(array: [8, -6, 2, 109, 3, 71]) {
 }
 
 class SomeClass: NSObject {
-    let property: String
+    @objc let property: String
     @objc(xxxx)
     var myProperty:String = ""
     @objc(doSomethingWithInt:)
@@ -691,7 +721,7 @@ manager.data.append("Some more data")
 print(manager.data)
 print(manager.importer.fileName)
 
-// MARK:- About point in swift
+// MARK:- About pointer in swift
 var intV = 10
 var mpInt = UnsafeMutablePointer<Int>.allocate(capacity: 1)
 mpInt.initialize(to: intV)
@@ -710,10 +740,10 @@ print(intV)
 
 
 var voidPtr = withUnsafeMutablePointer(to: &intV, { (ptr:UnsafeMutablePointer<Int>) -> UnsafeMutableRawPointer in
-    return unsafeBitCast(ptr, to: UnsafeMutableRawPointer.self)
+    return UnsafeMutableRawPointer(ptr)
     })
 
-var intP = unsafeBitCast(voidPtr, to: UnsafeMutablePointer<Int>.self)
+var intP = voidPtr.assumingMemoryBound(to: Int.self)
 print("int p = \(intP.pointee)")
 
 
@@ -725,14 +755,14 @@ var nextPtr = basePtr?.successor()
 print(nextPtr?.pointee ?? "")
 
 let stringParams = "123455656677"
-let pStr = UnsafeMutablePointer<Int8>.allocate(capacity: stringParams.characters.count)
+let pStr = UnsafeMutablePointer<Int8>.allocate(capacity: stringParams.count)
 pStr.initialize(from: stringParams.cString(using: String.Encoding.utf8)!)
 print(showInfo(params: pStr))
 
-let pRawPtr = UnsafeMutableRawPointer.allocate(bytes: stringParams.characters.count, alignedTo: MemoryLayout<String>.alignment)
+let pRawPtr = UnsafeMutableRawPointer.allocate(bytes: stringParams.count, alignedTo: MemoryLayout<String>.alignment)
 let tPtr = pRawPtr.initializeMemory(as: String.self, to: stringParams)
 print(pRawPtr.load(as: String.self))
-let ttPtr = pRawPtr.initializeMemory(as: Int8.self, from: pStr, count: stringParams.characters.count)
+let ttPtr = pRawPtr.initializeMemory(as: Int8.self, from: pStr, count: stringParams.count)
 print(showInfo(params: ttPtr))
 
 

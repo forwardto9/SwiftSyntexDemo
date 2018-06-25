@@ -9,18 +9,22 @@
 import Foundation
 
 class Person: NSObject {
-    var name: String
+    @objc var name: String
     fileprivate var age:Int = 0
-    var friends: [Person] = []
-    var bestFriend: Person? = nil
+    @objc var friends: [Person] = []
+    @objc var bestFriend: Person? = nil
     
-    init(name: String) {
-        self.name = name
+    init(name: String?) {
+        // 条件执行
+        precondition(name != nil, "name must be not empty")
+        self.name = name!
     }
     
     init(name:String!, age:Int = 0) {
         self.name = name
         self.age = age;
     }
+    
+    
     
 }

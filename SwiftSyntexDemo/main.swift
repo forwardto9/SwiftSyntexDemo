@@ -18,6 +18,7 @@ class HTMLElement {
     @objc   let text: String?
     
     // 这个地方使用？符号标记，是为了可以在外面进行赋空值操作，从而可以标记为可以释放引用
+    //  lazy修饰的属性，可以用来表明这个属性的值是不可知的，是依赖外部条件的，直到在一个实例被创建完成之后；只有被用到的时候才会被创建，这个特性可以用来实现懒加载
     lazy var asHTML: (() -> String)? = { [unowned self] in // 此处使用unowned标记，可以让闭包标中不在强引用self
         if let text = self.text {
             return "<\(self.name)>\(text)</\(self.name)>"
@@ -533,18 +534,19 @@ class UPoint {
 }
 // only for file scope
 // first declare the override operator
-//infix operator +- {associativity right precedence 0}
+//infix operator +- {associativity right precedence 0} //不再推荐使用
+infix operator +-:AdditionPrecedence // 新的方式，需要知道precedence group 参照：https://developer.apple.com/documentation/swift/swift_standard_library/operator_declarations
 // then complemention
-//func +-(p1:UPoint, p2:UPoint) -> UPoint {
-//    return UPoint(x: p2.x! - p1.x!, y: p2.y! + p1.y!)
-//}
+func +-(p1:UPoint, p2:UPoint) -> UPoint {
+    return UPoint(x: p2.x! - p1.x!, y: p2.y! + p1.y!)
+}
 
 
 
 var p1 = UPoint(x: 1, y: 2)
 var p2 = UPoint(x: 3, y: -1)
 
-//let p3 = p1 +- p2
+let p3 = p1 +- p2
 
 
 //#if swift(>=3.0)
@@ -562,6 +564,10 @@ let jim = Person(name: "Jim")
 let yuanyuan = Person(name: "Yuanyuan")
 gabrielle.friends = [jim, yuanyuan]
 gabrielle.bestFriend = yuanyuan
+// 使用let 对一个optional的对象取值的步骤是：1.先询问optional对象是不是空，2如果是空，在不进行赋值，且跳过if；如果不是空，则进行unwrap操作（等同于使用 ! 操作），并进行赋值操作
+if let name = gabrielle.bestFriend?.name {
+    print(name)
+}
 print ( gabrielle.value(forKeyPath: #keyPath(Person.bestFriend.name)) as Any )
 
 

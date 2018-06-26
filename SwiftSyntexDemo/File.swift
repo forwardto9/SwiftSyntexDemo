@@ -21,19 +21,39 @@ class FileA {
     }
     
     static var property2 = "X"
+    // class 声明的属性，一般用于computed property，可以让子类来重写子类的逻辑
     class var property3:String {
         return "333"
     }
+    
+    // 使用final，让属性，方法，subscript都不可以被override
+    // 也可以使用final修饰 class，标识不让继承
+    final func cannotOverrideMethod() -> Void {
+        print("not allowed to be overrided")
+    }
+    func canOverrideMethod() -> Void {
+        print("allow to be overrided")
+    }
+    
     
 }
 
 
 class FileB: FileA {
+    // static 声明的 type property 是不允许重写的
 //    override static var property1:Int = 10
-//    override static var property2 = "99"
+    // class 声明的 type property 是允许重写的
     override class var property3:String {
         return "2222"
     }
+    
+    override func canOverrideMethod() {
+        print("sub class completition")
+    }
+    
+//    override func cannotOverrideMethod() {
+//
+//    }
 }
 
 

@@ -348,8 +348,8 @@ class ClassA {
         handlers.append(completion)
     }
     
-    
-    
+    // 此属性用于提醒编译器，不需要对未使用返回值的调用发出警告
+    // @discardableResult
     func test() -> Int {
         accc.fileprivateName = ""
         return 0
@@ -729,13 +729,15 @@ print(manager.importer.fileName)
 
 // MARK:- About pointer in swift
 var intV = 10
+// 申请内存，类似 C 中的 Int *
 var mpInt = UnsafeMutablePointer<Int>.allocate(capacity: 1)
+// 给内存初始化
 mpInt.initialize(to: intV)
 print(mpInt.pointee)
 intV = mpInt.pointee + 1
-mpInt.deinitialize()
-mpInt.deallocate(capacity: 1)
-
+//mpInt.deinitialize()
+//mpInt.deallocate(capacity: 1)
+mpInt.deallocate()
 
 intV = withUnsafeMutablePointer(to: &intV, { (ptr:UnsafeMutablePointer<Int>) -> Int in
     ptr.pointee += 1
@@ -744,7 +746,7 @@ intV = withUnsafeMutablePointer(to: &intV, { (ptr:UnsafeMutablePointer<Int>) -> 
 
 print(intV)
 
-
+// 类似C中的 void *
 var voidPtr = withUnsafeMutablePointer(to: &intV, { (ptr:UnsafeMutablePointer<Int>) -> UnsafeMutableRawPointer in
     return UnsafeMutableRawPointer(ptr)
     })
@@ -760,14 +762,19 @@ print(basePtr?.pointee ?? "")
 var nextPtr = basePtr?.successor()
 print(nextPtr?.pointee ?? "")
 
-let stringParams = "123455656677"
+var stringParams = "123455656677"
 let pStr = UnsafeMutablePointer<Int8>.allocate(capacity: stringParams.count)
-pStr.initialize(from: stringParams.cString(using: String.Encoding.utf8)!)
+pStr.initialize(from: stringParams.cString(using: String.Encoding.utf8)!, count: stringParams.lengthOfBytes(using: .utf8))
 print(showInfo(params: pStr))
 
-let pRawPtr = UnsafeMutableRawPointer.allocate(bytes: stringParams.count, alignedTo: MemoryLayout<String>.alignment)
-let tPtr = pRawPtr.initializeMemory(as: String.self, to: stringParams)
+//let pRawPtr = UnsafeMutableRawPointer.allocate(bytes: stringParams.count, alignedTo: MemoryLayout<String>.alignment)
+let pRawPtr = UnsafeMutableRawPointer.allocate(byteCount: stringParams.count, alignment: MemoryLayout<String>.alignment)
+//let tPtr = pRawPtr.initializeMemory(as: String.self, to: stringParams)
+let ppStr = UnsafeMutablePointer<String>.allocate(capacity:1)
+ppStr.initialize(from: &stringParams, count: 1)
+pRawPtr.initializeMemory(as: String.self, from: ppStr, count: 1)
 print(pRawPtr.load(as: String.self))
+
 let ttPtr = pRawPtr.initializeMemory(as: Int8.self, from: pStr, count: stringParams.count)
 print(showInfo(params: ttPtr))
 
@@ -776,24 +783,28 @@ struct AAA {
     var value:Int
 }
 func initRawAA(p:UnsafeMutableRawPointer) -> UnsafeMutablePointer<AAA> {
-    return p.initializeMemory(as: AAA.self, to: AAA(value: 1111))
+    return p.initializeMemory(as: AAA.self, repeating: AAA(value: 1111), count: 1)
+//     p.initializeMemory(as: AAA.self, to: AAA(value: 1111)) // old API
 }
 
-let rawPtr = UnsafeMutableRawPointer.allocate(bytes: MemoryLayout<AAA>.stride, alignedTo: MemoryLayout<AAA>.alignment)
+let rawPtr = UnsafeMutableRawPointer.allocate(byteCount: 1 * MemoryLayout<AAA>.stride, alignment: MemoryLayout<AAA>.alignment)
 let pa = initRawAA(p: rawPtr)
 print(rawPtr.load(as: AAA.self))
 print(pa.pointee.value)
 
-let rp = UnsafeMutableRawPointer.allocate(bytes: 1, alignedTo: 1)
-rp.bindMemory(to: AAA.self, capacity: 2)
+
+let count = 4
+// 100 bytes of raw memory are allocated for the pointer bytesPointer, and then the first four bytes are bound to the AAA type.
+let bytesPointer = UnsafeMutableRawPointer.allocate( byteCount: 100, alignment: MemoryLayout<AAA>.alignment)
+let aaaPointer = bytesPointer.bindMemory(to: AAA.self, capacity: count)
+print(aaaPointer.pointee)
 
 
 //var mpString = UnsafeMutablePointer<String>(allocatingCapacity: 1)
 var mpString = UnsafeMutablePointer<String>.allocate(capacity: 1)
 mpString.initialize(to: "uwei")
 print(mpString.pointee)
-mpString.deinitialize()
-mpString.deallocate(capacity: 1)
+mpString.deallocate()
 
 
 

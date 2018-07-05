@@ -568,6 +568,9 @@ gabrielle.bestFriend = yuanyuan
 if let name = gabrielle.bestFriend?.name {
     print(name)
 }
+
+//MARK: Runtime in Swift
+// #selector
 print ( gabrielle.value(forKeyPath: #keyPath(Person.bestFriend.name)) as Any )
 
 

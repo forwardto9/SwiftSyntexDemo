@@ -20,11 +20,13 @@ class Person: NSObject {
         self.name = name!
     }
     
+    // 同名冲突
+/*
     init(name:String!, age:Int = 0) {
         self.name = name
         self.age = age;
     }
-    
-    
+*/
+ 
     
 }

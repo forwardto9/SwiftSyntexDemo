@@ -11,12 +11,25 @@ import Foundation
 
 
 class FileA {
+    
+    // 这样的做法会导致循环访问
+/*
     static var property1:Int {
         set {
             self.property1 = newValue
         }
         get {
             return self.property1
+        }
+    }
+    */
+    static var number:Int = 0
+    static var property1:Int {
+        set {
+            number = newValue + 10000
+        }
+        get {
+            return number
         }
     }
     
@@ -62,6 +75,8 @@ class FileB: FileA {
 func displayInfo() -> Void {
     print("This a test message")
     print(FileB.property2)
+    FileA.property1 = 1
+    print(FileA.property1)
 }
 
 public class TestFileName {

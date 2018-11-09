@@ -878,5 +878,22 @@ displayInfo()
 #endif
 
 
+@dynamicMemberLookup
+struct DynamicStruct {
+    let dictionary = ["someDynamicMember": 325,
+                      "someOtherMember": 787]
+    // must be implementation
+    subscript(dynamicMember member: String) -> Int {
+        return dictionary[member] ?? 1054
+    }
+}
+let s = DynamicStruct()
 
+// Using dynamic member lookup
+let dynamic = s.someOtherMember
+print(dynamic)
+// Prints "325"
 
+// Calling the underlying subscript directly
+let equivalent = s[dynamicMember: "someDynamicMember"]
+print(dynamic == equivalent)

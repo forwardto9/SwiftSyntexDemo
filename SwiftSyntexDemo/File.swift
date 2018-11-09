@@ -47,8 +47,6 @@ class FileA {
     func canOverrideMethod() -> Void {
         print("allow to be overrided")
     }
-    
-    
 }
 
 
@@ -85,6 +83,9 @@ public class TestFileName {
         acc.internalName = "interal"
         acc.openName     = "open"
         acc.publicName   = "public"
+    }
+    @warn_unqualified_access
+    func min() -> Void {
     }
 }
 

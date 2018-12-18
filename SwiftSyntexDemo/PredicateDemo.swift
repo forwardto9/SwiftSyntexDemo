@@ -6,6 +6,9 @@
 //  Copyright © 2017 Tencent. All rights reserved.
 //
 
+// link: https://developer.apple.com/library/archive/documentation/Cocoa/Conceptual/Predicates/Articles/pSyntax.html#//apple_ref/doc/uid/TP40001795
+
+
 import Foundation
 
 fileprivate let firstNamekey = "firstName"
@@ -51,6 +54,10 @@ let charlie = PersonDemo(firstName: "Charlie", lastName: "Smith", age: 33)
 let quentin = PersonDemo(firstName: "Quentin", lastName: "Alberts", age: 31)
 let people:NSArray = ([alice, bob, charlie, quentin] as NSArray)
 
+class ParentObject: NSObject {
+    @objc dynamic public let objectBob = PersonDemo(firstName: "Bob", lastName: "Jones", age: 40)
+}
+
 class PredicateDemo:NSObject {
     
     let numbersArray = [1,2,3,6,79, -23];
@@ -59,6 +66,7 @@ class PredicateDemo:NSObject {
     func testPredicate() -> Void {
         
         //MARK:- compare
+        //  =, ==, >=, =>, <=, =<, >, <, !=, <>
         let numPredicate1 = NSPredicate(format: "SELF < 10", argumentArray:nil);
         let r1 = (numbersArray as NSArray).filtered(using: numPredicate1)
         print(r1)
@@ -73,13 +81,20 @@ class PredicateDemo:NSObject {
         let numPredicate2 = NSPredicate(format: "SELF BETWEEN {0, 10}", argumentArray:nil);
         print((numbersArray as NSArray).filtered(using: numPredicate2))
         
+        let boolValue = false
+        let boolPredicate = NSPredicate(format: "self == TRUE")
+        print("bool predicate result is \(boolPredicate.evaluate(with: boolValue))")
+        
+        
         //MARK:- Logic
+        // AND, &&, OR, ||, NOT, !
         let p3 = NSPredicate(format: "SELF > 2 && SELF < 7", argumentArray: nil)
         for n in numbersArray {
            print("n is \(n) result is \(p3.evaluate(with: n))")
         }
         
         //MARK:- Strings
+        // BEGINSWITH; CONTAINS; ENDSWITH; LIKE; MATCHES; UTI-CONFORMS-TO; UTI-EQUALS
         let p4 = NSPredicate(format: "SELF LIKE[cd] '?wei*'", argumentArray: nil)
         print((namesArray as NSArray).filtered(using: p4))
 
@@ -87,6 +102,7 @@ class PredicateDemo:NSObject {
         print((namesArray as NSArray).filtered(using: p5))
         
         //MARK:- Set
+        // ANY, SOME; ALL; NONE; IN;
         let p6 = NSPredicate(format: "age in {30,31, 32,33}", argumentArray: nil)
         print((people).filtered(using: p6))
         
@@ -95,13 +111,11 @@ class PredicateDemo:NSObject {
         let p7 = NSPredicate(format: "age >= 31", argumentArray: nil)
         print((people).filtered(using: p7))
         
+        // 与上面等价
         let lE7 = NSExpression(forKeyPath: "age")
         let rE7 = NSExpression(forConstantValue: 31)
         let cp7 = NSComparisonPredicate(leftExpression: lE7, rightExpression: rE7, modifier: .direct, type: .greaterThanOrEqualTo, options: .normalized)
         print((people).filtered(using: cp7))
-        
-        
-        
         
         
         let p8 = NSPredicate(format: "age >= 31 && age <= 33", argumentArray: nil)
@@ -131,6 +145,12 @@ class PredicateDemo:NSObject {
         let p12 = tempP11.withSubstitutionVariables(["value":33])
         print((people).filtered(using: p12))
         
+        // MARK:- key-path
+        // Note: swfit中使用keypath，属性必须要使用dynamic来声明
+        let p13 = NSPredicate(format: "objectBob.age > 30", argumentArray: nil)
+        let pBob = ParentObject()
+        print(pBob.objectBob.age)
+        print("bob's age\(p13.evaluate(with: pBob) ? " >" : "<") 30")
         
         
         //MARK:- Expression function

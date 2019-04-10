@@ -8,6 +8,44 @@
 
 import Foundation
 
+@dynamicCallable // Swift 5 可以调用对象实例就像调用一个可以带有任意数量的函数一样,
+struct TelephoneExchange {
+    // 参数必须遵循协议： ExpressibleByArrayLiteral
+    func dynamicallyCall(withArguments nums:[Int]) {
+        if nums == [1,1,0] {
+            print("police number")
+        } else {
+            print("unrecoginzed number")
+        }
+    }
+    
+    // 参数必须遵循协议： ExpressibleByDictionaryLiteral， Key必须要遵循协议：ExpressibleByStringLiteral
+    func dynamicallyCall(withKeywordArguments pairs: KeyValuePairs<String, Int>) -> String {
+        return pairs.map{lable, count in
+            repeatElement(lable, count: count).joined(separator: "-")
+        }.joined(separator: "|")
+    }
+    
+    // 此方法就不能将实例对象模拟成函数调用，因为不遵循上述要求
+    func dynamicallyCall(withArguments nums:Int) {
+        print(nums)
+    }
+}
+
+let telEx = TelephoneExchange()
+//telEx([1,1,10]) // error , 参数类型匹配不到
+telEx(1,1,10)
+telEx(1,1,0)
+
+//telEx("test") // error , 参数类型匹配不到
+//telEx(A:1, B:"") // error , 参数类型匹配不到
+
+print(telEx(A:1, B:2))
+
+telEx.dynamicallyCall(withArguments: 1)
+
+
+
 let predicateDemo = PredicateDemo()
 predicateDemo.testPredicate()
 
@@ -460,7 +498,7 @@ do {
 }
 
 // try?，当方法调用出现throw的时候，方法的返回值是nil，throw出的error会被取消
-let testThrowErrorResult = try? testThrowError(result: -1)
+let testThrowErrorResult = ((try? testThrowError(result: -1)) as String??)
 print(testThrowErrorResult as Any )
 
 var index = 0
@@ -768,7 +806,7 @@ print(nextPtr?.pointee ?? "")
 var stringParams = "123455656677"
 let pStr = UnsafeMutablePointer<Int8>.allocate(capacity: stringParams.count)
 pStr.initialize(from: stringParams.cString(using: String.Encoding.utf8)!, count: stringParams.lengthOfBytes(using: .utf8))
-print(showInfo(params: pStr))
+print(showInfo(params: pStr) ?? "default value")
 
 //let pRawPtr = UnsafeMutableRawPointer.allocate(bytes: stringParams.count, alignedTo: MemoryLayout<String>.alignment)
 let pRawPtr = UnsafeMutableRawPointer.allocate(byteCount: stringParams.count, alignment: MemoryLayout<String>.alignment)
@@ -779,7 +817,7 @@ pRawPtr.initializeMemory(as: String.self, from: ppStr, count: 1)
 print(pRawPtr.load(as: String.self))
 
 let ttPtr = pRawPtr.initializeMemory(as: Int8.self, from: pStr, count: stringParams.count)
-print(showInfo(params: ttPtr))
+print(showInfo(params: ttPtr) ?? "default value")
 
 
 struct AAA {

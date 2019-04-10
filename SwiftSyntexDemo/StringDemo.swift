@@ -38,7 +38,7 @@ class StringDemo {
 //        var stringView = String.CharacterView(demoString)
 //        print(stringView.startIndex)
         let hearts = "Hearts <3 ♥︎ 💘"
-        if let i = hearts.index(of: " ") {
+        if let i = hearts.firstIndex(of: " ") {
             // 对于字符串来说，使用的编码方式是不同的, swift 默认是 Unicode的编码
             let j = i.samePosition(in: hearts.unicodeScalars)
             print(Array(hearts.unicodeScalars.prefix(upTo: j!)))
@@ -54,13 +54,13 @@ class StringDemo {
         print(subjectString.decomposedStringWithCanonicalMapping)
         print(String.init(10, radix: 2))
         print(demoString.capitalized)
-        let closeBound = demoString.startIndex...demoString.index(of: "o")!
+        let closeBound = demoString.startIndex...demoString.firstIndex(of: "o")!
         let bound1 = 0 ..< 5
         print(bound1)
         demoString.replaceSubrange(closeBound, with: "xxx")
         print(demoString)
 //        print(demoString.substring(to: demoString.index(of: "b")!))  //old api
-        print(demoString[demoString.startIndex..<demoString.index(of: "b")!])
+        print(demoString[demoString.startIndex..<demoString.firstIndex(of: "b")!])
         demoString.append("123")
         let trimString = "a  b c def".trimmingCharacters(in: CharacterSet.init(charactersIn: "abc"))
         print(trimString)

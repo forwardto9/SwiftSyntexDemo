@@ -289,20 +289,26 @@ print("result = \(result)")
 StringDemo.demo()
 
 // MARK:  Enum
-//enum Color:Int {
-enum Color {
-    case red, black
+//enum Color:Int { // 指定类型
+enum Color { // 未指定类型
+//    case red, black
+    case red, black, blue
     func colorDescription() -> String {
         switch self {
         case .red:
             return "RED"
         case .black:
             return "BLACK"
+//        default:
+        @unknown default: //编译时期会提醒有未覆盖的case需要添加
+            return ("color is unknown")
         }
     }
 }
 //print(Color.black.rawValue)
 print(Color.black)
+print(Color.black.colorDescription())
+print(Color.blue.colorDescription())
 
 enum ServerResponse {
     case result(String, String)
@@ -913,6 +919,14 @@ displayInfo()
     #else
     print("other")
 
+#endif
+
+#if swift(>=5)
+print("Swift5")
+#elseif swift(<5) && swift(>=4.1)
+print("Swift4.2")
+#else
+print("Swift lower!")
 #endif
 
 

@@ -65,5 +65,17 @@ class StringDemo {
         let trimString = "a  b c def".trimmingCharacters(in: CharacterSet.init(charactersIn: "abc"))
         print(trimString)
         print("String Done!")
+        
+        var extensionLiteralString = #"line1 \n line2"#
+        print(extensionLiteralString)
+        extensionLiteralString = ##"line1 \##n line2"##
+        print(extensionLiteralString)
+        extensionLiteralString = #"""
+        line1 \t
+        line2 "
+        line3
+        """#
+        print(extensionLiteralString)
+        
     }
 }

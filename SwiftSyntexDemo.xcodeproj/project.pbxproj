@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C2313F7222754AB600F2DEBF /* types.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2313F7122754AB600F2DEBF /* types.swift */; };
+		C2313F75227557AD00F2DEBF /* SwiftFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2313F74227557AD00F2DEBF /* SwiftFunctions.swift */; };
 		C243A6701D90D4A500DF7851 /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = C243A66F1D90D4A500DF7851 /* File.swift */; };
 		C264E66E1EF91DC90067BA7A /* PredicateDemo.swift in Sources */ = {isa = PBXBuildFile; fileRef = C264E66D1EF91DC90067BA7A /* PredicateDemo.swift */; };
 		C264E6701EF91E4D0067BA7A /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = C264E66F1EF91E4D0067BA7A /* Model.swift */; };
@@ -28,6 +30,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		C2313F7122754AB600F2DEBF /* types.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = types.swift; sourceTree = "<group>"; };
+		C2313F74227557AD00F2DEBF /* SwiftFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftFunctions.swift; sourceTree = "<group>"; };
 		C243A66F1D90D4A500DF7851 /* File.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = File.swift; sourceTree = "<group>"; };
 		C264E66D1EF91DC90067BA7A /* PredicateDemo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PredicateDemo.swift; sourceTree = "<group>"; };
 		C264E66F1EF91E4D0067BA7A /* Model.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
@@ -51,6 +55,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		C2313F7022754A9A00F2DEBF /* Types */ = {
+			isa = PBXGroup;
+			children = (
+				C2313F7122754AB600F2DEBF /* types.swift */,
+			);
+			path = Types;
+			sourceTree = "<group>";
+		};
+		C2313F732275579700F2DEBF /* Functions */ = {
+			isa = PBXGroup;
+			children = (
+				C2313F74227557AD00F2DEBF /* SwiftFunctions.swift */,
+			);
+			path = Functions;
+			sourceTree = "<group>";
+		};
 		C2AFEBB81BBA3E2500900151 = {
 			isa = PBXGroup;
 			children = (
@@ -70,6 +90,8 @@
 		C2AFEBC31BBA3E2500900151 /* SwiftSyntexDemo */ = {
 			isa = PBXGroup;
 			children = (
+				C2313F732275579700F2DEBF /* Functions */,
+				C2313F7022754A9A00F2DEBF /* Types */,
 				C2E98E501D51E63600D0EFF0 /* CryptoSwift.h */,
 				C2AFEBC41BBA3E2500900151 /* main.swift */,
 				C2E98E0D1D51E20A00D0EFF0 /* SwiftSyntexDemo-Bridging-Header.h */,
@@ -146,7 +168,9 @@
 				C2AFEBC51BBA3E2500900151 /* main.swift in Sources */,
 				C264E6701EF91E4D0067BA7A /* Model.swift in Sources */,
 				C243A6701D90D4A500DF7851 /* File.swift in Sources */,
+				C2313F75227557AD00F2DEBF /* SwiftFunctions.swift in Sources */,
 				C2CF16851DD44E5C00810D30 /* StringDemo.swift in Sources */,
+				C2313F7222754AB600F2DEBF /* types.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

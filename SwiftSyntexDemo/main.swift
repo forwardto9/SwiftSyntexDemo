@@ -8,6 +8,9 @@
 
 import Foundation
 
+SwiftFunctions()
+SwiftTypes()
+
 @dynamicCallable // Swift 5 可以调用对象实例就像调用一个可以带有任意数量的函数一样,
 struct TelephoneExchange {
     // 参数必须遵循协议： ExpressibleByArrayLiteral

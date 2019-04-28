@@ -96,6 +96,23 @@ class SwiftFunctions {
         let stringAsP: P = "Hello!"
         printGenericInfo(stringAsP)
         
+        let words = ["one", "two", "three", "four"]
+        let numbers = 1...4
+        
+        // 合并数组
+        for (word, number) in zip(words, numbers) {
+            print("\(word): \(number)")
+        }
+        // 元组数组
+        let ua = zip(words, numbers).map{$0}
+        print(ua)
+        // 字典
+        let ud = Dictionary(uniqueKeysWithValues: zip(words, numbers))
+        print(ud)
+        // 字典，且去掉重复的键
+        let fruits = ["Apple", "Pear", "Pear", "Orange"]
+        let dic = Dictionary(zip(fruits, repeatElement(1, count: fruits.count)), uniquingKeysWith: +)
+        print(dic)
         
         print("intput something:")
         let input = readLine()

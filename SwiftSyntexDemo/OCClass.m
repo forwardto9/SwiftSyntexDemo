@@ -8,6 +8,11 @@
 
 #import "OCClass.h"
 
+
+#if !__has_feature(objc_arc)
+#warning("this is need to ARC")
+#endif
+
 @implementation OCClass
 - (void)showInfo:(NSString *)name {
     NSLog(@"%@", name);

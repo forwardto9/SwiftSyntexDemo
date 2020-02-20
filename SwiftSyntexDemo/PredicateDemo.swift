@@ -60,10 +60,26 @@ class ParentObject: NSObject {
 
 class PredicateDemo:NSObject {
     
+    
+    let phoneNumbner1 = "13810234598";
+    let phoneNumbner2 = "1381023459";
+    
+    
     let numbersArray = [1,2,3,6,79, -23];
     let namesArray = ["jack", "jacky", "winson", "will", "uweiyuan", "UweiX"]
     
     func testPredicate() -> Void {
+        
+        // MARK: - Regx
+        let phoneRegx = "^[1][3-9]\\d{9}$"
+        let phonePredicate = NSPredicate(format: "SELF MATCHES %@", phoneRegx)
+        if phonePredicate.evaluate(with: phoneNumbner1) {
+            print(phoneNumbner1);
+        }
+        
+        if phonePredicate.evaluate(with: phoneNumbner2) {
+            print(phoneNumbner2);
+        }
         
         //MARK:- compare
         //  =, ==, >=, =>, <=, =<, >, <, !=, <>

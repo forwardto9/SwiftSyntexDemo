@@ -205,8 +205,12 @@ for string in stackString.items {
 // 针对函数泛型，编译器对类型进行推断
 // 由于p2传入了2，编译器已经将T2推断为Int，p4就只能是Int
 //stackString.find(p1: 1, p2: 2, p3: "test generic", p4: "?")
-stackString.find(p1: 1, p2: 2, p3: "test generic", p4: 4)
-stackInt.find(p1: (2, 7, 9), p2: 2)
+GenericUtils.find(p1: 1, p2: 2, p3: "test generic", p4: 4)
+GenericUtils.find(p1: (2, 7, 9), p2: 2)
+let stackInt1 = Stack(items: [5,2])
+let indexx = GenericUtils.findIndex(target: stackInt, in: [stackInt1, stackInt])
+print("find \((indexx != nil) ? indexx! : 0 )")
+
 
 // Now all your tasks have finished
 

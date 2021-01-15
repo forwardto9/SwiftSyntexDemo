@@ -8,6 +8,8 @@
 
 import Foundation
 
+ClosureClass().call(x: 10)
+
 SwiftFunctions()
 SwiftTypes()
 
@@ -145,22 +147,6 @@ tsc?.testVar = "swift"
 tsc = nil
 
 
-
-func numberNotation(_ number:Int64) -> String {
-    var numberString = ""
-    let weight:Int64 = 10000
-    if number >= weight {
-        let fx1 = Float(number) / Float(weight)
-        numberString = NSString(format: "%.2f", fx1).appending("万")
-    } else {
-        numberString = NSString(format: "%d", number) as String
-    }
-    return numberString
-}
-
-print(numberNotation(11000))
-
-
 @available(iOS 10, *)
 func testiOS10() -> Void {
     print("10")
@@ -178,11 +164,6 @@ protocol MyRenamedProtocol {
 }
 
 @available(iOS, unavailable, renamed: "MyRenamedProtocol")
-
-
-
-
-
 class protocolTest: MyProtocol {
 }
 
@@ -201,52 +182,6 @@ class OverLoading {
 let overload1 = OverLoading()
 overload1.overload() // no warning
 overload1.overload(p1: "overload")
-
-extension Stack where Element:Equatable {
-    func isTop(_ item: Element) -> Bool {
-        guard let topItem = items.last else {
-            return false
-        }
-        return topItem == item
-    }
-}
-
-protocol Container {
-    associatedtype Item
-    mutating func append(_ item: Item)
-    var count: Int { get }
-    subscript(i: Int) -> Item { get }
-}
-
-// MARK: Generic Type
-struct Stack<Element>:Container {// 泛型支持是通过<>符号
-    typealias Item = Element
-    
-    internal subscript(i: Int) -> Element {
-        return self.items[i];
-    }
-
-    mutating internal func append(_ item: Element) {
-        self.items.append(item)
-    }
-
-    internal var count: Int {
-        return self.items.count
-    }
-
-    var items = [Element]()
-    // 结构体中，如果某个方法想要改变这个结构体，必须要添加mutating关键字
-    mutating func push(item:Element) -> Void {
-        self.items.append(item)
-    }
-    
-    mutating func pop() -> Void {
-        self.items.removeLast()
-    }
-    
-    
-    
-}
 
 
 var stackInt = Stack(items: [1,2,4])
@@ -267,20 +202,6 @@ for string in stackString.items {
 }
 
 
-
-// MARK: GCD in Swift
-let group = DispatchGroup()
-
-DispatchQueue.concurrentPerform(iterations: 30) { (x) in
-    group.enter()
-    print("x = \(x)")
-    group.leave()
-}
-
-let result = group.wait(timeout: DispatchTime.distantFuture)
-print("result = \(result)")
-
-
 // Now all your tasks have finished
 
 
@@ -291,42 +212,7 @@ print("result = \(result)")
 // MARK: - String
 StringDemo.demo()
 
-// MARK:  Enum
-//enum Color:Int { // 指定类型
-enum Color { // 未指定类型
-//    case red, black
-    case red, black, blue
-    func colorDescription() -> String {
-        switch self {
-        case .red:
-            return "RED"
-        case .black:
-            return "BLACK"
-//        default:
-        @unknown default: //编译时期会提醒有未覆盖的case需要添加
-            return ("color is unknown")
-        }
-    }
-}
-//print(Color.black.rawValue)
-print(Color.black)
-print(Color.black.colorDescription())
-print(Color.blue.colorDescription())
 
-enum ServerResponse {
-    case result(String, String)
-    case failure(String)
-}
-
-let sucess = ServerResponse.result("6:00am", "9:00pm")
-let failuer = ServerResponse.failure("Out of service")
-print(sucess)
-switch sucess {
-case let .result(sunrise, sunset):
-    print("sunrice is at \(sunrise), sunset is at \(sunset)")
-case let .failure(reason):
-    print("failure reason is \(reason)")
-}
 
 
 print(EnumDemoX)
@@ -365,35 +251,8 @@ class ClassA {
     
     required init (x:Int) {
         self.x = x
-        
-        
-        let swiftCallback : @convention(block) (CGFloat, CGFloat) -> CGFloat = {
-            (x, y) -> CGFloat in
-            return x + y
-        }
-        print(swiftCallback(10, 19))
-        
     }
     
-    
-    func methodAutoclosure( _ completion: @autoclosure ()->Void) {
-        
-        completion()
-        print("yyyy")
-        //       handlers.append(completion)
-    }
-    
-    
-    func methodNoEscape( _ completion: ()->Void) {
-        
-        completion()
-        print("yyyy")
-        //       handlers.append(completion)
-    }
-    
-    func methodEscape(_ completion: @escaping ()->Void) {
-        handlers.append(completion)
-    }
     
     // 此属性用于提醒编译器，不需要对未使用返回值的调用发出警告
     // @discardableResult
@@ -411,21 +270,11 @@ class ClassA {
 
 let a = ClassA(x: 0)
 let b = ClassA(x: 0)
-a.methodNoEscape { 
-    print("No Escape")
-}
-a.methodAutoclosure(
-    {
-        print("Autoclosure")
-    }()
-)
-
 if a === b {
     print("===")
 } else {
     print("!==")
 }
-
 a.test()
 if type(of: a) === type(of: b) {
     print("===")
@@ -463,10 +312,7 @@ let f = Number.integer
 let evenInts:[Number] = [2, 10].map(f)
 print(evenInts)
 
-enum ErrorEnum:Error {
-    case error1
-    case error2
-}
+
 
 func neverRetuen() -> Never {
     fatalError("Something very, very bad happened")
@@ -478,37 +324,7 @@ guard weigh > 0 else {
 }
 
 
-// MARK: Error Handling
-@discardableResult // 取消返回值未用到的编译警告
-func testThrowError(result num:Int?) throws ->String? {
-    defer { // defer代码块类似OC中try catch finally块中的finally块，始终是函数中最后执行的，可以用于还原设置、清理现场等场景
-        print("this is like exceeded finally")
-    }
-    guard Int(num!) > 0 else {
-    print("num <= 0")
-    
-    throw ErrorEnum.error1
-    }
-    print("num = \(String(describing: num))")
-    return String(describing: num)
-}
 
-
-// rethrows only for parameters throw error
-func testRethrowError(callback:() throws -> Void) rethrows {
-    try callback()
-}
-
-
-do {
-    try testThrowError(result: -1)
-} catch ErrorEnum.error1 {
-    print("catch error!")
-}
-
-// try?，当方法调用出现throw的时候，方法的返回值是nil，throw出的error会被取消
-let testThrowErrorResult = ((try? testThrowError(result: -1)) as String??)
-print(testThrowErrorResult as Any )
 
 var index = 0
 label :while index < 10 {
@@ -777,104 +593,9 @@ manager.data.append("Some more data")
 print(manager.data)
 print(manager.importer.fileName)
 
-// MARK:- About pointer in swift
-var intV = 10
-// 申请内存，类似 C 中的 Int *
-var mpInt = UnsafeMutablePointer<Int>.allocate(capacity: 1)
-// 给内存初始化
-mpInt.initialize(to: intV)
-print(mpInt.pointee)
-intV = mpInt.pointee + 1
-//mpInt.deinitialize()
-//mpInt.deallocate(capacity: 1)
-mpInt.deallocate()
-
-intV = withUnsafeMutablePointer(to: &intV, { (ptr:UnsafeMutablePointer<Int>) -> Int in
-    ptr.pointee += 1
-    return ptr.pointee
-    })
-
-print(intV)
-
-// 类似C中的 void *
-var voidPtr = withUnsafeMutablePointer(to: &intV, { (ptr:UnsafeMutablePointer<Int>) -> UnsafeMutableRawPointer in
-    return UnsafeMutableRawPointer(ptr)
-    })
-
-var intP = voidPtr.assumingMemoryBound(to: Int.self)
-print("int p = \(intP.pointee)")
-
-
-var array = [1111,2222]
-var arrPtr = UnsafeBufferPointer<Int>(start: &array, count:array.count)
-var basePtr = arrPtr.baseAddress
-print(basePtr?.pointee ?? "")
-var nextPtr = basePtr?.successor()
-print(nextPtr?.pointee ?? "")
-
-var stringParams = "123455656677"
-let pStr = UnsafeMutablePointer<Int8>.allocate(capacity: stringParams.count)
-pStr.initialize(from: stringParams.cString(using: String.Encoding.utf8)!, count: stringParams.lengthOfBytes(using: .utf8))
-print(showInfo(params: pStr) ?? "default value")
-
-//let pRawPtr = UnsafeMutableRawPointer.allocate(bytes: stringParams.count, alignedTo: MemoryLayout<String>.alignment)
-let pRawPtr = UnsafeMutableRawPointer.allocate(byteCount: stringParams.count, alignment: MemoryLayout<String>.alignment)
-//let tPtr = pRawPtr.initializeMemory(as: String.self, to: stringParams)
-let ppStr = UnsafeMutablePointer<String>.allocate(capacity:1)
-ppStr.initialize(from: &stringParams, count: 1)
-pRawPtr.initializeMemory(as: String.self, from: ppStr, count: 1)
-print(pRawPtr.load(as: String.self))
-
-let ttPtr = pRawPtr.initializeMemory(as: Int8.self, from: pStr, count: stringParams.count)
-print(showInfo(params: ttPtr) ?? "default value")
-
-
-struct AAA {
-    var value:Int
-}
-func initRawAA(p:UnsafeMutableRawPointer) -> UnsafeMutablePointer<AAA> {
-    return p.initializeMemory(as: AAA.self, repeating: AAA(value: 1111), count: 1)
-//     p.initializeMemory(as: AAA.self, to: AAA(value: 1111)) // old API
-}
-
-let rawPtr = UnsafeMutableRawPointer.allocate(byteCount: 1 * MemoryLayout<AAA>.stride, alignment: MemoryLayout<AAA>.alignment)
-let pa = initRawAA(p: rawPtr)
-print(rawPtr.load(as: AAA.self))
-print(pa.pointee.value)
-
-
-let count = 4
-// 100 bytes of raw memory are allocated for the pointer bytesPointer, and then the first four bytes are bound to the AAA type.
-let bytesPointer = UnsafeMutableRawPointer.allocate( byteCount: 100, alignment: MemoryLayout<AAA>.alignment)
-let aaaPointer = bytesPointer.bindMemory(to: AAA.self, capacity: count)
-print(aaaPointer.pointee)
-
-
-//var mpString = UnsafeMutablePointer<String>(allocatingCapacity: 1)
-var mpString = UnsafeMutablePointer<String>.allocate(capacity: 1)
-mpString.initialize(to: "uwei")
-print(mpString.pointee)
-mpString.deallocate()
 
 
 
-
-func md5(string: String) -> String {
-    var digest:[UInt8] = [UInt8](repeating:0, count:Int(CC_MD5_DIGEST_LENGTH))
-    let data = string.data(using: String.Encoding.utf8)! as NSData
-    CC_MD5(data.bytes, CC_LONG(data.length), &digest)
-    
-    var digestHex = ""
-    for index in 0..<Int(CC_MD5_DIGEST_LENGTH) {
-        digestHex += String(format: "%02x", digest[index])
-    }
-    
-    return digestHex
-}
-
-let md5String = md5(string: "uwei")
-print(md5String)
-print(md5(string: md5String))
 
 
 
@@ -952,3 +673,8 @@ print(dynamic)
 // Calling the underlying subscript directly
 let equivalent = s[dynamicMember: "someDynamicMember"]
 print(dynamic == equivalent)
+
+
+let md5String = md5(string: "uwei")
+print(md5String)
+print(md5(string: md5String))

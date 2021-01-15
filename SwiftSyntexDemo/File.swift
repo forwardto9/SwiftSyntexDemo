@@ -65,6 +65,18 @@ class FileB: FileA {
 //    override func cannotOverrideMethod() {
 //
 //    }
+    
+    
+    lazy var lazyProperty:String = {
+        if self.lazyProperty.count > 0 {
+            let x = "123"
+            let y = "456"
+            print("fuck");
+            return x + y
+        }
+        return self.lazyProperty;
+    }()
+    
 }
 
 
@@ -73,6 +85,8 @@ class FileB: FileA {
 func displayInfo() -> Void {
     print("This a test message")
     print(FileB.property2)
+    print(FileB().lazyProperty)
+    print(FileB().lazyProperty)
     FileA.property1 = 1
     print(FileA.property1)
 }

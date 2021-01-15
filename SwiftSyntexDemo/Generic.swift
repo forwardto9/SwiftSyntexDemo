@@ -55,4 +55,10 @@ struct Stack<Element>:Container {// 泛型支持是通过<>符号
         print("p1 = \(type(of: p1)), p2 = \(p2), p3 = \(p3), p4 = \(p4)")
     }
     
+    func find<T1, T2>(p1:T1, p2:T2) -> Void {
+        let pt = p1 as! (Int, Int, Int)
+        
+        print("p1 = \(type(of: p1)), p2 = \(p2), p.0 = \(pt.0)")
+    }
+    
 }

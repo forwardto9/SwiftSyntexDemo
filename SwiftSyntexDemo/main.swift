@@ -8,6 +8,7 @@
 
 import Foundation
 
+TupleClass.m0()
 ClosureClass().call(x: 10)
 
 SwiftFunctions()
@@ -205,6 +206,7 @@ for string in stackString.items {
 // 由于p2传入了2，编译器已经将T2推断为Int，p4就只能是Int
 //stackString.find(p1: 1, p2: 2, p3: "test generic", p4: "?")
 stackString.find(p1: 1, p2: 2, p3: "test generic", p4: 4)
+stackInt.find(p1: (2, 7, 9), p2: 2)
 
 // Now all your tasks have finished
 
@@ -347,16 +349,6 @@ class SubNSObject: NSObject {
     }
     
     
-}
-
-
-
-let tuple1 = (27, "uwei")
-let tuple2 = (28, "yuan")
-let tuple3 = (1, "X", "12")
-
-if tuple1 < tuple2 {
-    print("<")
 }
 
 

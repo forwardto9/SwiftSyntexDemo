@@ -51,6 +51,8 @@ struct Stack<Element>:Container {// 泛型支持是通过<>符号
         self.items.removeLast()
     }
     
-    
+    func find<T1, T2>(p1:T1, p2:T2, p3:String, p4:T2) -> Void {
+        print("p1 = \(type(of: p1)), p2 = \(p2), p3 = \(p3), p4 = \(p4)")
+    }
     
 }

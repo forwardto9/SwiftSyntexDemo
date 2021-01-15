@@ -201,6 +201,10 @@ for string in stackString.items {
     print(string)
 }
 
+// 针对函数泛型，编译器对类型进行推断
+// 由于p2传入了2，编译器已经将T2推断为Int，p4就只能是Int
+//stackString.find(p1: 1, p2: 2, p3: "test generic", p4: "?")
+stackString.find(p1: 1, p2: 2, p3: "test generic", p4: 4)
 
 // Now all your tasks have finished
 

@@ -17,6 +17,12 @@
 - (void)showInfo:(NSString *)name {
     NSLog(@"%@", name);
 }
+
+- (void)dealloc
+{
+    NSLog(@"%s", __func__);
+}
+
 @end
 NSString * getInfo(const char *params) {
     return [NSString stringWithCString:params encoding:NSUTF8StringEncoding];

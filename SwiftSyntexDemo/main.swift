@@ -8,6 +8,13 @@
 
 import Foundation
 
+ARCDemo()
+
+exit(0)
+// 访问 OC中的枚举
+print(EnumDemoX)
+OCClass().info(name: "uwei")
+
 if #available(OSX 10.15.0, *) {
     opaqueDemo()
 } else {
@@ -60,98 +67,6 @@ telEx.dynamicallyCall(withArguments: 1)
 
 let predicateDemo = PredicateDemo()
 predicateDemo.testPredicate()
-
-
-class HTMLElement {
-    
-    let name: String
-    @objc   let text: String?
-    
-    // 这个地方使用？符号标记，是为了可以在外面进行赋空值操作，从而可以标记为可以释放引用
-    //  lazy修饰的属性，可以用来表明这个属性的值是不可知的，是依赖外部条件的，直到在一个实例被创建完成之后；只有被用到的时候才会被创建，这个特性可以用来实现懒加载
-    lazy var asHTML: (() -> String)? = { [unowned self] in // 此处使用unowned标记，可以让闭包标中不在强引用self
-        if let text = self.text {
-            return "<\(self.name)>\(text)</\(self.name)>"
-        } else {
-            return "<\(self.name) />"
-        }
-    }
-    
-    init(name: String, text: String? = nil) {
-        self.name = name
-        self.text = text
-    }
-    
-    deinit {
-        print("\(name) is being deinitialized")
-    }
-    
-}
-
-
-var heading:HTMLElement? = HTMLElement(name: "h1")
-let defaultText = "some default text"
-heading!.asHTML = {
-    return "<\(heading!.name)>\(heading?.text ?? defaultText)</\(heading!.name)>"
-}
-print(heading!.asHTML!())
-
-heading = nil
-
-
-var paragraph: HTMLElement? = HTMLElement(name: "p", text: "hello, world")
-print(paragraph!.asHTML?() ?? "hahaha")
-//paragraph!.asHTML = nil (如果asHTML被？符号标记，此处必须要释放，这样才能让paragraph充分释放)
-paragraph = nil
-
-
-class Country {
-    let name:String
-    var capitalCity:City! // 这样声明，表示这个值默认是nil
-    init(name:String, capitalName:String) {
-        self.name = name // 到此为止，self实例就创建完毕，可以访问了，如果不是按照！符号的声明方式，下面的代码就会无法编译
-        self.capitalCity = City(name: capitalName, country: self)
-    }
-}
-
-class City {
-    let name:String
-    unowned let country:Country
-    init(name:String, country:Country) {
-        self.name = name
-        self.country = country
-    }
-}
-
-let country = Country(name: "zhongguo", capitalName: "beijing")
-let city = City(name: "beijing", country: country)
-
-
-
-class TestOCClass: NSObject {
-    var testVar:NSString? = ""
-//    deinit {
-//        print("deinit from TestOCClass")
-//        testVar = nil
-//    }
-}
-
-class TestSwiftClass: NSObject {
-    var testVar:String? = ""
-    deinit {
-        print("deinit from TestSwiftClass")
-//        testVar = nil
-    }
-}
-
-
-var toc:TestOCClass? = TestOCClass()
-toc?.testVar = "oc"
-toc = nil
-
-var tsc:TestSwiftClass? = TestSwiftClass()
-tsc?.testVar = "swift"
-tsc = nil
 
 
 @available(iOS 10, *)
@@ -220,19 +135,8 @@ print("find \((indexx != nil) ? indexx! : 0 )")
 
 // Now all your tasks have finished
 
-
-
-
-
-
 // MARK: - String
 StringDemo.demo()
-
-
-
-
-print(EnumDemoX)
-OCClass().info(name: "uwei")
 
 func swapTest(al a:inout Int, bl b:inout Int) {
     let temp = a

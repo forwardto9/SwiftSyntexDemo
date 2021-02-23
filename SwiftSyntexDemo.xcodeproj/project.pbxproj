@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		C22BFD8625E4DEED0020C2FC /* Opaque.swift in Sources */ = {isa = PBXBuildFile; fileRef = C22BFD8525E4DEED0020C2FC /* Opaque.swift */; };
+		C22BFD8925E4FCCD0020C2FC /* ARC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C22BFD8825E4FCCD0020C2FC /* ARC.swift */; };
 		C2313F7222754AB600F2DEBF /* types.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2313F7122754AB600F2DEBF /* types.swift */; };
 		C2313F75227557AD00F2DEBF /* SwiftFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2313F74227557AD00F2DEBF /* SwiftFunctions.swift */; };
 		C243A6701D90D4A500DF7851 /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = C243A66F1D90D4A500DF7851 /* File.swift */; };
@@ -40,6 +41,7 @@
 
 /* Begin PBXFileReference section */
 		C22BFD8525E4DEED0020C2FC /* Opaque.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Opaque.swift; sourceTree = "<group>"; };
+		C22BFD8825E4FCCD0020C2FC /* ARC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARC.swift; sourceTree = "<group>"; };
 		C2313F7122754AB600F2DEBF /* types.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = types.swift; sourceTree = "<group>"; };
 		C2313F74227557AD00F2DEBF /* SwiftFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftFunctions.swift; sourceTree = "<group>"; };
 		C243A66F1D90D4A500DF7851 /* File.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = File.swift; sourceTree = "<group>"; };
@@ -128,6 +130,7 @@
 				C2CC835525B129E00011AFED /* Enum.swift */,
 				C2CC835825B12AB40011AFED /* Utils.swift */,
 				C2CC835C25B13B770011AFED /* Tuple.swift */,
+				C22BFD8825E4FCCD0020C2FC /* ARC.swift */,
 			);
 			path = SwiftSyntexDemo;
 			sourceTree = "<group>";
@@ -190,6 +193,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C22BFD8925E4FCCD0020C2FC /* ARC.swift in Sources */,
 				C2CC835D25B13B770011AFED /* Tuple.swift in Sources */,
 				C2CF16831DD40B5F00810D30 /* OCClass.m in Sources */,
 				C264E66E1EF91DC90067BA7A /* PredicateDemo.swift in Sources */,

@@ -21,4 +21,8 @@ class TupleClass {
         print("name is \(tuple4.name)")
 
     }
+    
+    deinit {
+        print("Tuple deinit")
+    }
 }

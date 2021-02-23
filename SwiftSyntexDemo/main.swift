@@ -8,6 +8,12 @@
 
 import Foundation
 
+if #available(OSX 10.15.0, *) {
+    opaqueDemo()
+} else {
+    // Fallback on earlier versions
+}
+
 TupleClass.m0()
 ClosureClass().call(x: 10)
 

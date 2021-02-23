@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C22BFD8625E4DEED0020C2FC /* Opaque.swift in Sources */ = {isa = PBXBuildFile; fileRef = C22BFD8525E4DEED0020C2FC /* Opaque.swift */; };
 		C2313F7222754AB600F2DEBF /* types.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2313F7122754AB600F2DEBF /* types.swift */; };
 		C2313F75227557AD00F2DEBF /* SwiftFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2313F74227557AD00F2DEBF /* SwiftFunctions.swift */; };
 		C243A6701D90D4A500DF7851 /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = C243A66F1D90D4A500DF7851 /* File.swift */; };
@@ -38,6 +39,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		C22BFD8525E4DEED0020C2FC /* Opaque.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Opaque.swift; sourceTree = "<group>"; };
 		C2313F7122754AB600F2DEBF /* types.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = types.swift; sourceTree = "<group>"; };
 		C2313F74227557AD00F2DEBF /* SwiftFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftFunctions.swift; sourceTree = "<group>"; };
 		C243A66F1D90D4A500DF7851 /* File.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = File.swift; sourceTree = "<group>"; };
@@ -120,6 +122,7 @@
 				C2CC834625B1253D0011AFED /* Closure.swift */,
 				C2CC834925B125A90011AFED /* Generic.swift */,
 				C2CC834C25B127330011AFED /* GCD.swift */,
+				C22BFD8525E4DEED0020C2FC /* Opaque.swift */,
 				C2CC834F25B127AF0011AFED /* Pointer.swift */,
 				C2CC835225B128200011AFED /* Error.swift */,
 				C2CC835525B129E00011AFED /* Enum.swift */,
@@ -196,6 +199,7 @@
 				C2CC835925B12AB40011AFED /* Utils.swift in Sources */,
 				C264E6701EF91E4D0067BA7A /* Model.swift in Sources */,
 				C243A6701D90D4A500DF7851 /* File.swift in Sources */,
+				C22BFD8625E4DEED0020C2FC /* Opaque.swift in Sources */,
 				C2CC835025B127AF0011AFED /* Pointer.swift in Sources */,
 				C2CC834A25B125A90011AFED /* Generic.swift in Sources */,
 				C2CC834725B1253D0011AFED /* Closure.swift in Sources */,
